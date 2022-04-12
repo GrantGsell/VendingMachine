@@ -36,7 +36,7 @@ public class VendingMachineController {
     }
     
     // Constructor for Dependency Injection
-    public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) throws VendingMachinePersistenceException{
+    public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) {
         this.service = service;
         this.view = view;
     }

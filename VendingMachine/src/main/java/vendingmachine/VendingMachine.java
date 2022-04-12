@@ -8,6 +8,7 @@ import vendingmachine.dao.VendingMachineDaoImpl;
 import vendingmachine.service.VendingMachineServiceLayer;
 import vendingmachine.service.VendingMachineServiceLayerImpl;
 import vendingmachine.ui.UserIO;
+import vendingmachine.ui.UserIOConsoleImpl;
 import vendingmachine.ui.VendingMachineView;
 
 /**
@@ -18,7 +19,7 @@ public class VendingMachine {
 
     public static void main(String[] args) {
         // Instantiate the UserIO implementation
-        UserIO appIO = UserIOConsoleImpl();
+        UserIO appIO = new UserIOConsoleImpl();
         
         // Instantiate the view and wire in the UserIO implementation
         VendingMachineView appView = new VendingMachineView(appIO);
@@ -37,14 +38,5 @@ public class VendingMachine {
         
         // Run the applicaiton
         appController.run();
-        
-        try{
-            VendingMachineController runner = new VendingMachineController();
-            runner.run();
-        }catch(Exception e){
-            System.out.println("Error");
-            e.printStackTrace();
-        }
-        
     }
 }

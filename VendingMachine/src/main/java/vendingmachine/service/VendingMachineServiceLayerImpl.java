@@ -52,7 +52,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         dao = new VendingMachineDaoImpl();
     }
     
-    public VendingMachineServiceLayerImpl(VendingMachineDao dao, VendingMachineAuditDao auditDao) throws VendingMachinePersistenceException{
+    public VendingMachineServiceLayerImpl(VendingMachineDao dao, VendingMachineAuditDao auditDao) {
         this.dao = dao;
         this.audit = auditDao;
     }

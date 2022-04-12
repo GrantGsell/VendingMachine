@@ -29,7 +29,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     /**
      * Vending machine constructors
      */
-    public VendingMachineDaoImpl() throws VendingMachinePersistenceException{
+    public VendingMachineDaoImpl() {
         // Instantiate itemsMap
         itemsMap = new HashMap<String, Items>();
         
@@ -39,8 +39,8 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
         // Load in the initalized data
         try{
             this.readDataBase();
-        }catch (Exception e){
-            throw new VendingMachinePersistenceException("Inital database read error", e);
+        }catch (VendingMachinePersistenceException e){
+            System.out.println("Inital database read error");
         }
     }
     
