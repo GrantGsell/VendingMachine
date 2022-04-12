@@ -64,6 +64,7 @@ public class VendingMachineController {
                         viewFunds();
                         break;
                     case 6:
+                        getChange();
                         keepGoing = false;
                         exitMessage();
                         break;
