@@ -64,7 +64,7 @@ public interface VendingMachineDao {
     
     /**
      * Decrements the stock field of the item associated with the provided 
-     * selection code.
+     * selection code. Throws error if the stock is already zero.
      * 
      * @param selectionCode, the code associated with the item whose stock is
      * going to be decremented.

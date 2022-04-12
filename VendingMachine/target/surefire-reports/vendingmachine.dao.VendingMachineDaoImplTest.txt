@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: vendingmachine.dao.VendingMachineDaoImplTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE!
+vendingmachine.dao.VendingMachineDaoImplTest.testIncrementDecrementItemStockMethod()  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "vendingmachine.dao.VendingMachineDao.addItem(String, vendingmachine.dto.Items)" because "this.testDao" is null
+	at vendingmachine.dao.VendingMachineDaoImplTest.testIncrementDecrementItemStockMethod(VendingMachineDaoImplTest.java:226)
+
+vendingmachine.dao.VendingMachineDaoImplTest.testGetAllItemsMethod()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "vendingmachine.dao.VendingMachineDao.addItem(String, vendingmachine.dto.Items)" because "this.testDao" is null
+	at vendingmachine.dao.VendingMachineDaoImplTest.testGetAllItemsMethod(VendingMachineDaoImplTest.java:188)
+
+vendingmachine.dao.VendingMachineDaoImplTest.testAddGetItemMethods()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "vendingmachine.dao.VendingMachineDao.addItem(String, vendingmachine.dto.Items)" because "this.testDao" is null
+	at vendingmachine.dao.VendingMachineDaoImplTest.testAddGetItemMethods(VendingMachineDaoImplTest.java:64)
+
+vendingmachine.dao.VendingMachineDaoImplTest.testRemoveItemMethod()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "vendingmachine.dao.VendingMachineDao.addItem(String, vendingmachine.dto.Items)" because "this.testDao" is null
+	at vendingmachine.dao.VendingMachineDaoImplTest.testRemoveItemMethod(VendingMachineDaoImplTest.java:99)
+
