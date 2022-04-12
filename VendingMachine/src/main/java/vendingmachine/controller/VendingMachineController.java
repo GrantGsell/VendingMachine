@@ -5,6 +5,8 @@
 package vendingmachine.controller;
 
 import vendingmachine.dao.VendingMachineDao;
+import vendingmachine.dao.VendingMachineDaoImpl;
+import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.ui.VendingMachineView;
 
 /**
@@ -15,7 +17,7 @@ public class VendingMachineController {
 
     // Model and VIew class objects
     private VendingMachineView view = new VendingMachineView();
-    private VendingMachineDao dao = new VendingMachineDaoFileImpl();
+    private VendingMachineDao dao = new VendingMachineDaoImpl();
 
     // Function that controls program flow
     public void run() {
@@ -45,9 +47,8 @@ public class VendingMachineController {
                         unknownCommand();
                 }
             }
-        } catch (VendingMachineDaoException e) {
+        } catch (VendingMachinePersistenceException e) {
             System.out.println(e.getMessage());
-
         }
         exitMessage();
     }

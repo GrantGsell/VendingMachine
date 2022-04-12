@@ -49,7 +49,7 @@ public class VendingMachineDaoImplTest {
 
     
     @Test
-    public void testAddGetItemMethods() {
+    public void testAddGetItemMethods() throws VendingMachinePersistenceException {
         // Create a new Item object
         Items item = new Items();
         
@@ -75,7 +75,7 @@ public class VendingMachineDaoImplTest {
     
     
     @Test
-    public void testRemoveItemMethod(){
+    public void testRemoveItemMethod() throws VendingMachinePersistenceException {
         // Create three new items objects
         Items item0 = new Items();
         item0.setName("Milk Duds");
@@ -170,7 +170,7 @@ public class VendingMachineDaoImplTest {
     
     
     @Test
-    public void testGetAllItemsMethod(){
+    public void testGetAllItemsMethod() throws VendingMachinePersistenceException {
         // Create three new items objects
         Items item0 = new Items();
         item0.setName("Milk Duds");
@@ -217,7 +217,7 @@ public class VendingMachineDaoImplTest {
     
     
     @Test
-    public void testIncrementDecrementItemStockMethod(){
+    public void testIncrementDecrementItemStockMethod() throws VendingMachinePersistenceException {
         // Create a new Item object
         Items item = new Items();
         
