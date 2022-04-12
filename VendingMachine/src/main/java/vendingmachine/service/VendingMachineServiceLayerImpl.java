@@ -16,80 +16,104 @@ import vendingmachine.dto.Items;
  *
  * @author Juan B
  */
-public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer{
+public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer {
 
     //Dao and local variables
     private VendingMachineDaoImpl dao;
     private BigDecimal credit = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
     private BigDecimal zero = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
-    
+
     // constructor
-    public VendingMachineServiceLayerImpl() throws VendingMachinePersistenceException{
+    public VendingMachineServiceLayerImpl() throws VendingMachinePersistenceException {
         dao = new VendingMachineDaoImpl();
     }
-    
-    
+
     /*
         This method takes in a code and will check if it is a valid code.
         If the code is invalid a null value is returned. If the cod esi valid
         then we will see if the item is purchaseable. If it is not then an exception will be
         thrown. If it is purchaseable it will decrement the available stock and update the 
         customer's credit. 
-    */
+     */
     @Override
-    public Items buyItem(String code)  throws VendingMachinePersistenceException, InsufficientFundsException, OutOfStockException{
-       
-       Items item = dao.getItem(code);
-       
-       if (item == null) return null;
-       
-       if (item.getStock() < 1) throw new OutOfStockException("Out of stock");
-       
-       BigDecimal itemCost = item.getPrice().setScale(2, RoundingMode.HALF_UP);
-       credit = credit.subtract(itemCost);
-       
-       if(credit.compareTo(zero) != -1){
-           dao.decrementItemStock(code);
-           return item;
-       }
-       
-       throw new InsufficientFundsException("Not enough funds");
+    public Items buyItem(String code) throws VendingMachinePersistenceException, InsufficientFundsException, OutOfStockException {
+
+        Items item = dao.getItem(code);
+
+        if (item == null) {
+            return null;
+        }
+
+        if (item.getStock() < 1) {
+            throw new OutOfStockException("Out of stock");
+        }
+
+        BigDecimal itemCost = item.getPrice().setScale(2, RoundingMode.HALF_UP);
+        credit = credit.subtract(itemCost);
+
+        if (credit.compareTo(zero) != -1) {
+            dao.decrementItemStock(code);
+            return item;
+        }
+
+        throw new InsufficientFundsException("Not enough funds");
     }
 
+    /*
+        This method will return the amount the user has available. 
+     */
     @Override
-    public BigDecimal getChange()  throws VendingMachinePersistenceException{
+    public BigDecimal getChange() throws VendingMachinePersistenceException {
         BigDecimal tmp = new BigDecimal(credit.toString());
         credit = new BigDecimal("0.00");
         return tmp;
-        
+
     }
 
+    /*
+        This will display all the items the user can purchase with their current
+        balance.
+     */
     @Override
-    public List<Items> purchaseable()  throws VendingMachinePersistenceException{
-        
+    public List<Items> purchaseable() throws VendingMachinePersistenceException {
+
         return dao.getAllItems().stream().filter((item) -> item.getPrice().compareTo(credit) != 1).collect(Collectors.toList());
-        
+
     }
 
+    /*
+        this method allows the user to add funds to the vending machine.
+        negative values are not accepted, nothing happens if a negative value is passed in.
+     */
     @Override
-    public void addCredit(BigDecimal amount)  throws VendingMachinePersistenceException{
-        
-        credit = credit.add(amount);
-        
+    public void addCredit(BigDecimal amount) throws VendingMachinePersistenceException {
+
+        if (amount.compareTo(zero) == 1) {
+            credit = credit.add(amount);
+        }
+
     }
 
+    /*
+        this method returns the ammount of credit the user has
+    */
+    
     @Override
-    public BigDecimal checkCredit()  throws VendingMachinePersistenceException{
-        
+    public BigDecimal checkCredit() throws VendingMachinePersistenceException {
+
         return credit;
-        
+
     }
 
+    /*
+        this will return the available items in the vending machine.
+    */
+    
     @Override
     public List<Items> getAllItems() throws VendingMachinePersistenceException {
-        
+
         return dao.getAllItems();
-        
+
     }
-    
+
 }
