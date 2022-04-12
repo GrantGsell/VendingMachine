@@ -26,7 +26,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
        
        Items item = dao.getItem(code);
        
-       if (item == null) return null;
+       if (item == null || item.getStock() == 0) return null;
        
        BigDecimal itemCost = item.getPrice();
        credit = credit.subtract(itemCost);
