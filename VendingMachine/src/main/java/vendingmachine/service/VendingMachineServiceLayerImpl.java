@@ -54,7 +54,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         If the code is invalid a null value is returned. If the cod esi valid
         then we will see if the item is purchaseable. If it is not then an exception will be
         thrown. If it is purchaseable it will decrement the available stock and update the 
-        customer's credit. 
+        customer's credit. If the purchase is complete, we will write out to a log.
      */
     @Override
     public Items buyItem(String code) throws VendingMachinePersistenceException, InsufficientFundsException, OutOfStockException {
