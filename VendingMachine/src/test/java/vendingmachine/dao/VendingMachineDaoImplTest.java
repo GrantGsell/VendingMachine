@@ -257,28 +257,4 @@ public class VendingMachineDaoImplTest {
         assertEquals(0, returnedItem.getStock(), "Item had a stock of 1 post "
                 + "double decrement, decrementing one more should yeild zero");
     }
-    
-    
-    @Test
-    public void testMarshallingUnmarshalling(){
-        // Create items object variables
-        String name = "Pencil";
-        BigDecimal price = new BigDecimal("0.99");
-        int stock = 5;
-        String code = "A0";
-        
-        // Create a stringbuilder object and add all of the
-        
-        // Create a new item object
-        Items item = new Items();
-        
-        // Populate the items object
-        item.setName(name);
-        item.setPrice(price);
-        item.setStock(stock);
-        item.setSelectionCode(code);
-        
-        
-        
-    }
 }
