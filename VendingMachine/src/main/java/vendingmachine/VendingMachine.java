@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import vendingmachine.controller.VendingMachineController;
+
 /**
  *
  * @author Grant
@@ -7,6 +9,7 @@ package vendingmachine;
 public class VendingMachine {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        VendingMachineController runner = new VendingMachineController();
+        runner.run();
     }
 }
