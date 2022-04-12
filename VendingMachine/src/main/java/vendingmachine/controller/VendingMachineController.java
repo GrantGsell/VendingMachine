@@ -6,6 +6,7 @@ package vendingmachine.controller;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import vendingmachine.service.InsufficientFundsException;
 import vendingmachine.service.OutOfStockException;
 import vendingmachine.dao.VendingMachineDao;
@@ -81,7 +82,8 @@ public class VendingMachineController {
 
     private void listInventory() throws VendingMachinePersistenceException {
         view.displayInventoryBanner();
-        //TODO
+        List<Items> allItems = service.getAllItems();
+        
     }
 
     private void addFunds() throws VendingMachinePersistenceException {
