@@ -127,7 +127,7 @@ public class VendingMachineServiceLayerImplTest {
             assertEquals(coins[3], 1, "There should be 1 penny in 3.71");
             
             //test valance
-            assertEquals(service.checkCredit(), new BigDecimal("0.0"), "The balance should be 0.00");
+            assertEquals(service.checkCredit(), new BigDecimal("0.00"), "The balance should be 0.00");
         }
         catch(Exception e){
             e.printStackTrace();
