@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 vendingmachine\dto\Items.class
 vendingmachine\dao\VendingMachinePersistenceException.class
 vendingmachine\ui\UserIO.class
 vendingmachine\dao\VendingMachineDao.class
+=======
+>>>>>>> 13770acbbe7357f6abd64133b3558ade12d4c608

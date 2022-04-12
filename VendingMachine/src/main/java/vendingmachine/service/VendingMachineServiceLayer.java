@@ -6,8 +6,6 @@ package vendingmachine.service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import vendingmachine.dao.InsufficientFundsException;
-import vendingmachine.dao.OutOfStockException;
 import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.dto.Items;
 
