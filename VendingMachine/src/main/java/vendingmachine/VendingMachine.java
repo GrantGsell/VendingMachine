@@ -14,6 +14,7 @@ public class VendingMachine {
             runner.run();
         }catch(Exception e){
             System.out.println("Error");
+            e.printStackTrace();
         }
         
     }

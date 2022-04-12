@@ -19,18 +19,18 @@ import vendingmachine.dto.Items;
 public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer {
 
     enum Coins {
-        QUARTER(new BigDecimal("0.25")),
-        DIME(new BigDecimal("0.10")),
-        NICKLE(new BigDecimal("0.5")),
-        PENNY(new BigDecimal("0.01"));
+        QUARTER(25),
+        DIME(10),
+        NICKLE(5),
+        PENNY(1);
 
-        private BigDecimal value;
+        private int value;
 
-        Coins(BigDecimal amount) {
+        Coins(int amount) {
             value = amount;
         }
 
-        BigDecimal getValue() {
+        int getValue() {
             return value;
         }
 
@@ -83,22 +83,26 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     @Override
     public BigDecimal getChange() throws VendingMachinePersistenceException {
         BigDecimal tmp = new BigDecimal(credit.toString());
-        //credit = new BigDecimal("0.00");
-
-        BigDecimal quarters = credit.divide(Coins.QUARTER.getValue());
-        credit = credit.divideAndRemainder(Coins.QUARTER.getValue())[1];
-
-        BigDecimal dimes = credit.divide(Coins.DIME.getValue());
-        credit = credit.divideAndRemainder(Coins.DIME.getValue())[1];
-
-        BigDecimal nickles = credit.divide(Coins.NICKLE.getValue());
-        credit = credit.divideAndRemainder(Coins.NICKLE.getValue())[1];
-
-        BigDecimal penny = credit.divide(Coins.PENNY.getValue());
-        credit = credit.divideAndRemainder(Coins.PENNY.getValue())[1];
-
-        System.out.println("Quarters: " + quarters + "\nDimes: " + dimes +"\nNickles: " + nickles+"\nPennies: " + penny);
         
+
+        credit = credit.multiply(new BigDecimal("100"));
+        int total = credit.intValue();
+
+        int quarters = total / Coins.QUARTER.value;
+        total = total % Coins.QUARTER.value;
+
+        int dimes = total / Coins.DIME.value;
+        total = total % Coins.DIME.value;
+
+        int nickles = total / Coins.NICKLE.value;
+        total = total % Coins.NICKLE.value;
+
+        int pennies = total / Coins.PENNY.value;
+        total = total % Coins.PENNY.value;
+
+        credit = new BigDecimal("0.00");
+        System.out.println("Quarters: " + quarters + "\nDimes: " + dimes + "\nNickles: " + nickles + "\nPennies: " + pennies);
+
         return tmp;
 
     }
