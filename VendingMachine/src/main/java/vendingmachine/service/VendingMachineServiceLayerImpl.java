@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import vendingmachine.dao.VendingMachineAuditDao;
 import vendingmachine.dao.VendingMachineAuditDaoImpl;
+import vendingmachine.dao.VendingMachineDao;
 import vendingmachine.dao.VendingMachineDaoImpl;
 import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.dto.Items;
@@ -37,16 +38,23 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         }
 
     }
+    
+    // Declare Dao, Audit Dao
+    private VendingMachineDao dao;
+    private VendingMachineAuditDao audit;
 
     //Dao and local variables
-    private VendingMachineDaoImpl dao;
     private BigDecimal credit = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
     private BigDecimal zero = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
-    private VendingMachineAuditDaoImpl  audit = new VendingMachineAuditDaoImpl();
 
-    // constructor
+    // constructors
     public VendingMachineServiceLayerImpl() throws VendingMachinePersistenceException {
         dao = new VendingMachineDaoImpl();
+    }
+    
+    public VendingMachineServiceLayerImpl(VendingMachineDao dao, VendingMachineAuditDao auditDao) throws VendingMachinePersistenceException{
+        this.dao = dao;
+        this.audit = auditDao;
     }
 
     /*

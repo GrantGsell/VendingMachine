@@ -28,11 +28,17 @@ public class VendingMachineController {
     private VendingMachineDao dao;// = new VendingMachineDaoImpl();
     private VendingMachineServiceLayer service;// = new VendingMachineServiceLayerImpl();
 
-    // Constructor
+    // Constructors
     public VendingMachineController() throws VendingMachinePersistenceException{
         view = new VendingMachineView();
         dao = new VendingMachineDaoImpl();
         service = new VendingMachineServiceLayerImpl();
+    }
+    
+    // Constructor for Dependency Injection
+    public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) throws VendingMachinePersistenceException{
+        this.service = service;
+        this.view = view;
     }
     
     

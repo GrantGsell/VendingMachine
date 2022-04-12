@@ -15,9 +15,18 @@ import vendingmachine.dto.Items;
  * @author harle
  */
 public class VendingMachineView {
-    // Display menu selection
-
-    private UserIO io = new UserIOConsoleImpl();
+    // UserIO declaration
+    private UserIO io;
+    
+    // Constructor
+    public VendingMachineView(){
+        
+    }
+    
+    // Constructor for Dependency Injection
+    public VendingMachineView(UserIO io){
+        this.io = io;
+    }
 
     // Display, take, and return an integer for a selection from the menu
     public int getMenuSelection() {

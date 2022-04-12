@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  *
  * @author Grant
  */
-public class VendingMachineAuditDaoImpl {
+public class VendingMachineAuditDaoImpl implements VendingMachineAuditDao {
     // Create audit file 
     public static final String AUDIT_FILE = "audit.txt";
     
