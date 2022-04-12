@@ -1,6 +1,8 @@
 C:\Users\Grant\Desktop\VendingMachine\VendingMachine\src\main\java\vendingmachine\dao\VendingMachineDaoImpl.java
 C:\Users\Grant\Desktop\VendingMachine\VendingMachine\src\main\java\vendingmachine\dto\Items.java
 C:\Users\Grant\Desktop\VendingMachine\VendingMachine\src\main\java\vendingmachine\dao\VendingMachineAuditDao.java
+C:\Users\Grant\Desktop\VendingMachine\VendingMachine\src\main\java\vendingmachine\dao\InsufficientFundsException.java
+C:\Users\Grant\Desktop\VendingMachine\VendingMachine\src\main\java\vendingmachine\dao\OutOfStockException.java
 C:\Users\Grant\Desktop\VendingMachine\VendingMachine\src\main\java\vendingmachine\service\VendingMachineServiceLayerImpl.java
 C:\Users\Grant\Desktop\VendingMachine\VendingMachine\src\main\java\vendingmachine\service\VendingMachineServiceLayer.java
 C:\Users\Grant\Desktop\VendingMachine\VendingMachine\src\main\java\vendingmachine\dao\VendingMachineDao.java

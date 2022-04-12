@@ -29,12 +29,19 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     /**
      * Vending machine constructors
      */
-    public VendingMachineDaoImpl(){
+    public VendingMachineDaoImpl() throws VendingMachinePersistenceException{
         // Instantiate itemsMap
         itemsMap = new HashMap<String, Items>();
         
         // Set text file to read, write to
         DATA_BASE = "vendingMachineDb.txt";
+        
+        // Load in the initalized data
+        try{
+        this.readDataBase();
+        }catch (Exception e){
+            throw new VendingMachinePersistenceException("Inital database read error", e);
+        }
     }
     
     public VendingMachineDaoImpl(String filePath){
