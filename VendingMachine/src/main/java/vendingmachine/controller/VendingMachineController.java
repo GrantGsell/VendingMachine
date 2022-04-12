@@ -65,6 +65,7 @@ public class VendingMachineController {
                         break;
                     case 6:
                         keepGoing = false;
+                        exitMessage();
                         break;
                     default:
                         unknownCommand();
@@ -74,10 +75,12 @@ public class VendingMachineController {
             System.out.println(e.getMessage());
         } catch (InsufficientFundsException in) {
             System.out.println("Sorry, you have insufficient funds for this item.");
+            run();
         } catch (OutOfStockException st) {
             System.out.println("Sorry, this item is currently out of stock.");
+            run();
         }
-        exitMessage();
+        //exitMessage();
     }
 
     private void listInventory() throws VendingMachinePersistenceException {
