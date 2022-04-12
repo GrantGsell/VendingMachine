@@ -4,6 +4,8 @@
  */
 package vendingmachine.ui;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author harle
@@ -20,8 +22,9 @@ public class VendingMachineView {
         io.print("2. Buy an item");
         io.print("3. See what you can afford");
         io.print("4. Get change");
-        io.print("5. EXIT");
-        return io.readInt("Select one of the choices above:", 1, 5);
+        io.print("5. View funds");
+        io.print("6. EXIT");
+        return io.readInt("Select one of the choices above:", 1, 6);
     }
 
     public void displayGetChangeBanner() {
@@ -30,6 +33,10 @@ public class VendingMachineView {
 
     public void displayAddFundsBanner() {
         io.print("=== Add Funds ===");
+    }
+
+    public void displayCurrentFundsBanner() {
+        io.print("=== Current Funds ===");
     }
 
     public String getFundsAdditionAmount() {
@@ -70,6 +77,10 @@ public class VendingMachineView {
 
     public void displayChangeSuccessBanner() {
         io.print("=== Thank you! ===");
+    }
+
+    public void displayChange(BigDecimal change) {
+        System.out.println("Your change is: " + change);
     }
 
 }
