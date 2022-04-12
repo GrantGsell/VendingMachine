@@ -83,7 +83,7 @@ public class VendingMachineView {
         io.print("=== Thank you! ===");
     }
 
-    public void displayChange(Integer [] change) {
+    public void displayChange(int[] change) {
         System.out.println("Your change is...\n " + "Quarters: " + change[0] + "\nDimes: " + change[1] + "\nNickles: " + change[2] + "\nPennies: " + change[3]);
     }
 

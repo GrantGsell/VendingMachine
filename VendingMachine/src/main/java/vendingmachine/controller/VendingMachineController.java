@@ -108,8 +108,10 @@ public class VendingMachineController {
 
     private void getChange() throws VendingMachinePersistenceException {
         view.displayGetChangeBanner();
+        BigDecimal currentCredit = service.checkCredit();
         int[] change = service.getChange();
         view.displayChange(change);
+        view.displayChangeFunds(currentCredit);
         view.displayChangeSuccessBanner();
     }
 
