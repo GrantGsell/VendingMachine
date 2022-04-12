@@ -81,29 +81,34 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         This method will return the amount the user has available. 
      */
     @Override
-    public BigDecimal getChange() throws VendingMachinePersistenceException {
+    public int[] getChange() throws VendingMachinePersistenceException {
         BigDecimal tmp = new BigDecimal(credit.toString());
         
+        int[] coins = new int[4];
 
         credit = credit.multiply(new BigDecimal("100"));
         int total = credit.intValue();
 
         int quarters = total / Coins.QUARTER.value;
         total = total % Coins.QUARTER.value;
+        coins[0] = quarters;
 
         int dimes = total / Coins.DIME.value;
         total = total % Coins.DIME.value;
-
+        coins[1] = dimes;
+        
         int nickles = total / Coins.NICKLE.value;
         total = total % Coins.NICKLE.value;
+        coins[2] = nickles;
 
         int pennies = total / Coins.PENNY.value;
         total = total % Coins.PENNY.value;
+        coins[3] = pennies;
 
         credit = new BigDecimal("0.00");
-        System.out.println("Quarters: " + quarters + "\nDimes: " + dimes + "\nNickles: " + nickles + "\nPennies: " + pennies);
+        //System.out.println("Quarters: " + quarters + "\nDimes: " + dimes + "\nNickles: " + nickles + "\nPennies: " + pennies);
 
-        return tmp;
+       return coins;
 
     }
 

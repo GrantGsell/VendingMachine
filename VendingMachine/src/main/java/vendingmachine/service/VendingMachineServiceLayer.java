@@ -17,7 +17,7 @@ public interface VendingMachineServiceLayer {
     
     public Items buyItem(String code)  throws VendingMachinePersistenceException, InsufficientFundsException, OutOfStockException;
     
-    public BigDecimal getChange()  throws VendingMachinePersistenceException;
+    public int[] getChange()  throws VendingMachinePersistenceException;
     
     public List<Items> purchaseable()  throws VendingMachinePersistenceException;
     
