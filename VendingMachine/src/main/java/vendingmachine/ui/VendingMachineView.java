@@ -91,7 +91,7 @@ public class VendingMachineView {
 
     public void displayStudentList(List<Items> allItems) {
         for (Items item : allItems) {
-            String itemInfo = String.format("#%s : %s - %s $%s",
+            String itemInfo = String.format("#%s : %s - x%s - $%s",
                     item.getSelectionCode(),
                     item.getName(),
                     item.getStock(),

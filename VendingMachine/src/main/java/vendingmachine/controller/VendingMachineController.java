@@ -83,7 +83,7 @@ public class VendingMachineController {
     private void listInventory() throws VendingMachinePersistenceException {
         view.displayInventoryBanner();
         List<Items> allItems = service.getAllItems();
-        
+        view.displayStudentList(allItems);
     }
 
     private void addFunds() throws VendingMachinePersistenceException {
