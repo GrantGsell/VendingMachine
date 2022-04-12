@@ -14,8 +14,10 @@ import vendingmachine.dto.Items;
  */
 public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer{
 
+    private BigDecimal credit;
+    
     @Override
-    public Items buyItem(Items item) {
+    public Items buyItem(String code) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

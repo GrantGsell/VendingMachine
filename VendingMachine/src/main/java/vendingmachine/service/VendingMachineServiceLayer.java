@@ -14,7 +14,7 @@ import vendingmachine.dto.Items;
  */
 public interface VendingMachineServiceLayer {
     
-    public Items buyItem(Items item);
+    public Items buyItem(String code);
     
     public BigDecimal getChange();
     
