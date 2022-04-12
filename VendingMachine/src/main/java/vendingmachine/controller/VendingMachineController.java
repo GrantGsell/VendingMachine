@@ -103,12 +103,12 @@ public class VendingMachineController {
 
     private void browseAffordableItems() throws VendingMachinePersistenceException {
         view.displayAffordableItemsBanner();
-        service.purchaseable();
+        view.displayItemList(service.purchaseable());        
     }
 
     private void getChange() throws VendingMachinePersistenceException {
         view.displayGetChangeBanner();
-        BigDecimal change = service.getChange();
+        Integer [] change = service.getChange();
         view.displayChange(change);
         view.displayChangeSuccessBanner();
     }
