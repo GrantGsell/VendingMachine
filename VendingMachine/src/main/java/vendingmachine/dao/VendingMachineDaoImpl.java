@@ -57,7 +57,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
      * the item that is being replaced.
      */
     @Override
-    public Items addItem(String selectionCode, Items item) {
+    public Items addItem(String selectionCode, Items item) throws VendingMachinePersistenceException {
         // Read in the database first to ensure map is up to date
         readDataBase();
         
@@ -82,7 +82,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
      * @return 
      */
     @Override
-    public Items removeItem(String selectionCode, Items item) {
+    public Items removeItem(String selectionCode, Items item) throws VendingMachinePersistenceException {
         // Read in the database first to ensure the map is up to date
         this.readDataBase();
         
@@ -105,7 +105,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
      * null.
      */
     @Override
-    public Items getItem(String selectionCode) {
+    public Items getItem(String selectionCode) throws VendingMachinePersistenceException {
         // Read in the database first to ensure the map is up to date
         this.readDataBase();
         
@@ -120,7 +120,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
      * @return a list of all items in the vending machine.
      */
     @Override
-    public List<Items> getAllItems() {
+    public List<Items> getAllItems() throws VendingMachinePersistenceException {
         // Read in the database first to ensure the map is up to date
         //this.readDataBase();
         
@@ -137,7 +137,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
      * @return the item object whose stock has been incremented.
      */
     @Override
-    public Items incrementItemStock(String selectionCode) {
+    public Items incrementItemStock(String selectionCode) throws VendingMachinePersistenceException {
         // Read in the database first to ensure the map is up to date
         this.readDataBase();
         
@@ -164,7 +164,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
      * @return the item object whose stock has been decremented.
      */
     @Override
-    public Items decrementItemStock(String selectionCode) {
+    public Items decrementItemStock(String selectionCode) throws VendingMachinePersistenceException {
         // Read in the database first to ensure the map is up to date      
         this.readDataBase(); 
         
@@ -250,7 +250,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     /**
      * Write data from itemsMap into the database text file.
      */
-    private void writeDataBase(){
+    private void writeDataBase() throws VendingMachinePersistenceException{
         // Declare PrintWriter object
         PrintWriter out;
         
@@ -265,7 +265,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
             out = new PrintWriter(new FileWriter(DATA_BASE));
         }catch (Exception e){
             // Throw custom exception
-            return;
+            throw new VendingMachinePersistenceException("Error writing to file", e);
         }
                 
         // Loop through all of the items
@@ -287,7 +287,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     /**
      *  Reads data from the database text file and stores it into the itemsMap.
      */
-    private void readDataBase(){
+    private void readDataBase() throws VendingMachinePersistenceException{
         // Declare scanner object
         Scanner scan;
         
@@ -302,7 +302,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
             scan = new Scanner(new BufferedReader(new FileReader(DATA_BASE)));
         }catch(Exception e){
             // Throw custom exception
-            return;
+            throw new VendingMachinePersistenceException("Error reading from file!", e);
         }
         
         // Loop through file until there is no more data to read

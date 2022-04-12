@@ -19,7 +19,7 @@ public interface VendingMachineDao {
      * @return null if the associated item matches the one provided, otherwise
      * the item that is being replaced.
      */
-    Items addItem(String selectionCode, Items item);
+    Items addItem(String selectionCode, Items item) throws VendingMachinePersistenceException;
     
     
     /**
@@ -31,7 +31,7 @@ public interface VendingMachineDao {
      * @param item, the item that will be removed.
      * @return 
      */
-    Items removeItem(String selectionCode, Items item);
+    Items removeItem(String selectionCode, Items item) throws VendingMachinePersistenceException;
     
     
     /**
@@ -41,7 +41,7 @@ public interface VendingMachineDao {
      * @return an Items object that is associated with selection code, otherwise
      * null.
      */
-    Items getItem(String selectionCode);
+    Items getItem(String selectionCode) throws VendingMachinePersistenceException;
     
     
     /**
@@ -49,7 +49,7 @@ public interface VendingMachineDao {
      * 
      * @return a list of all items in the vending machine.
      */
-    List<Items> getAllItems();
+    List<Items> getAllItems() throws VendingMachinePersistenceException;
     
     
     /**
@@ -59,7 +59,7 @@ public interface VendingMachineDao {
      * going to be incremented.
      * @return the item object whose stock has been incremented.
      */
-    Items incrementItemStock(String selectionCode);
+    Items incrementItemStock(String selectionCode) throws VendingMachinePersistenceException;
     
     
     /**
@@ -70,5 +70,5 @@ public interface VendingMachineDao {
      * going to be decremented.
      * @return the item object whose stock has been decremented.
      */
-    Items decrementItemStock(String selectionCode);
+    Items decrementItemStock(String selectionCode) throws VendingMachinePersistenceException;
 }
