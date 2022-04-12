@@ -24,7 +24,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     private final String DELIMETER = ":::";
     
     // Map to hold database data
-    Map<String, Items> itemsMap;
+    Map<String, Items> itemsMap = new HashMap<String, Items>();
     
     /**
      * Vending machine constructors
@@ -39,7 +39,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     
     public VendingMachineDaoImpl(String filePath){
         // Instantiate itemsMap
-        itemsMap = new HashMap<String, Items>();
+        //itemsMap = new HashMap<String, Items>();
         
         // Set text file to read, write to
         DATA_BASE = filePath;
@@ -59,13 +59,13 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     @Override
     public Items addItem(String selectionCode, Items item) {
         // Read in the database first to ensure map is up to date
-        this.readDataBase();
+        readDataBase();
         
         // Add the new item to the map, obtain map return value
         Items returnedItem = itemsMap.put(selectionCode, item);
         
         // Write the updated map to the database
-        this.writeDataBase();
+        writeDataBase();
         
         // Return new item
         return returnedItem;
@@ -122,10 +122,10 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     @Override
     public List<Items> getAllItems() {
         // Read in the database first to ensure the map is up to date
-        this.readDataBase();
+        //this.readDataBase();
         
         // Return all values of the map, which corresponds to all items objects
-        return new ArrayList(itemsMap.keySet());
+        return new ArrayList(itemsMap.values());
     }
 
     
@@ -147,8 +147,8 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
         // Increment the specified item stock
         item.setStock(item.getStock() + 1);
         
-        // Put the item back into the map
-        itemsMap.put(selectionCode, item);
+        // Update the HashMap and database
+        addItem(item.getSelectionCode(), item);
         
         // Return the specified, updated item
         return item;
@@ -174,8 +174,8 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
         // Decrement the specified item stock
         item.setStock(item.getStock() - 1);
         
-        // Put the item back into the map
-        itemsMap.put(selectionCode, item);
+        // Update the HashMap and database
+        addItem(item.getSelectionCode(), item);
         
         // Return the specified, updated item
         return item;
@@ -202,7 +202,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
        itemAsText.append(item.getStock()).append(DELIMETER);
        
        // Add item selectionCode
-       itemAsText.append(item.getSelectionCode()).append(DELIMETER);
+       itemAsText.append(item.getSelectionCode());
        
        // Convert stringbuilder to string and return
        return itemAsText.toString();

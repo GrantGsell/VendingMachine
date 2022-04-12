@@ -129,6 +129,9 @@ public class VendingMachineDaoImplTest {
         // Remove second item (item1)
         removedItem = testDao.removeItem(item1.getSelectionCode(), item1);
         
+        // Update the itemsList
+        itemsList = testDao.getAllItems();
+        
         // Assert equals that the removed item is the second item (item1)
         assertEquals(removedItem, item1, "Returned item should be item1");
                 
@@ -138,6 +141,9 @@ public class VendingMachineDaoImplTest {
         
         // Remove the third and last item
         removedItem = testDao.removeItem(item2.getSelectionCode(), item2);
+        
+        // Update the itemsList
+        itemsList = testDao.getAllItems();
         
         // Assert equals that the removed item is the third item (item2)
         assertEquals(removedItem, item2, "Returned item should be item2");
@@ -225,9 +231,9 @@ public class VendingMachineDaoImplTest {
         // Add items object to DAO
         Items returnedItem = testDao.addItem(item.getSelectionCode(), item);
         
-        // Assert true that the returned item is the original item
-        assertEquals(returnedItem, item, "Returned item should be the same as "
-                + "the original item");
+        // Assert null due to no collisions in the hashmap
+        assertEquals(returnedItem, null, "Returned item should be null since "
+                + "there were no collisions, due to empty HashMap");
         
         // Increment item stock by one, return to new item object
         returnedItem = testDao.incrementItemStock(code);
@@ -248,7 +254,7 @@ public class VendingMachineDaoImplTest {
         returnedItem = testDao.decrementItemStock(code);
         
         // Assert returned item object stock is equal to 0
-        assertEquals(returnedItem.getStock(), 0, "Item had a stock of 1 post "
+        assertEquals(0, returnedItem.getStock(), "Item had a stock of 1 post "
                 + "double decrement, decrementing one more should yeild zero");
     }
 }
