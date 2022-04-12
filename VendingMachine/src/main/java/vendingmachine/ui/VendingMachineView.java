@@ -20,7 +20,31 @@ public class VendingMachineView {
         io.print("2. Buy an item");
         io.print("3. See what you can afford");
         io.print("4. EXIT");
-        return io.readInt("Select one of the choices above:");
+        return io.readInt("Select one of the choices above:", 1, 4);
+    }
+
+    public void displayAddFundsBanner() {
+        io.print("=== Add Funds ===");
+    }
+
+    public Double getFundsAdditionAmount() {
+        return io.readDouble("Please enter payment amount.");
+    }
+
+    public void displayFundsAddedBanner() {
+        io.print("=== Your funds have been added! ===");
+    }
+
+    public void displayBuyItemBanner() {
+        io.print("=== Buy an Item ===");
+    }
+
+    public String getItemCode() {
+        return io.readString("Please enter the code for the item to be purchased.");
+    }
+
+    public void displayAffordableItemsBanner() {
+        io.print("=== Currently Affordable Items ===");
     }
 
     public void displayExitBanner() {
@@ -39,8 +63,5 @@ public class VendingMachineView {
         io.print("=== Inventory ===");
     }
 
-    public void displayAffordableInventoryBanner() {
-        io.print("=== Currently Affordable Items ===");
-    }
-    
+
 }
