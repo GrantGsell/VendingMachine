@@ -5,6 +5,7 @@
 package vendingmachine.service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
 import vendingmachine.dao.VendingMachineDaoImpl;
@@ -18,8 +19,8 @@ import vendingmachine.dto.Items;
 public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer{
 
     private VendingMachineDaoImpl dao = new VendingMachineDaoImpl();
-    private BigDecimal credit = new BigDecimal("0.00");
-    private BigDecimal zero = new BigDecimal("0.00");
+    private BigDecimal credit = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
+    private BigDecimal zero = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
     
     @Override
     public Items buyItem(String code)  throws VendingMachinePersistenceException{
@@ -28,7 +29,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
        
        if (item == null || item.getStock() == 0) return null;
        
-       BigDecimal itemCost = item.getPrice();
+       BigDecimal itemCost = item.getPrice().setScale(2, RoundingMode.HALF_UP);
        credit = credit.subtract(itemCost);
        
        if(credit.compareTo(zero) != -1){
