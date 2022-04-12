@@ -11,6 +11,7 @@ import vendingmachine.dao.VendingMachineDaoImpl;
 import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.dto.Items;
 import vendingmachine.service.VendingMachineServiceLayer;
+import vendingmachine.service.VendingMachineServiceLayerImpl;
 import vendingmachine.ui.VendingMachineView;
 
 /**
@@ -22,7 +23,7 @@ public class VendingMachineController {
     // Model and VIew class objects
     private VendingMachineView view = new VendingMachineView();
     private VendingMachineDao dao = new VendingMachineDaoImpl();
-    private VendingMachineServiceLayer service = new VendingMachineServiceLayer();
+    private VendingMachineServiceLayer service = new VendingMachineServiceLayerImpl();
 
     // Function that controls program flow
     public void run() {
@@ -77,8 +78,7 @@ public class VendingMachineController {
     private void buyItem() throws VendingMachinePersistenceException {
         view.displayBuyItemBanner();
         String itemCode = view.getItemCode();
-        Items item = dao.getItem(itemCode);
-        service.buyItem(item);
+        service.buyItem(itemCode);
         view.displayEnjoyBanner();
     }
 
