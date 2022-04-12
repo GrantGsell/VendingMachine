@@ -66,11 +66,12 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
             throw new OutOfStockException("Out of stock");
         }
 
-        BigDecimal itemCost = item.getPrice().setScale(2, RoundingMode.HALF_UP);
-        credit = credit.subtract(itemCost);
+        BigDecimal newBalance = credit.subtract(item.getPrice().setScale(2, RoundingMode.HALF_UP));
+        
 
-        if (credit.compareTo(zero) != -1) {
+        if (newBalance.compareTo(zero) != -1) {
             dao.decrementItemStock(code);
+            credit = newBalance;
             return item;
         }
 
@@ -78,7 +79,9 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     }
 
     /*
-        This method will return the amount the user has available. 
+        This method will return the amount of coins to give to the user.
+        The return value is an int[] where int[0] is quarters followed by
+        dimes, nickles and pennies in order.
      */
     @Override
     public int[] getChange() throws VendingMachinePersistenceException {

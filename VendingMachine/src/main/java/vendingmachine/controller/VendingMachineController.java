@@ -75,8 +75,10 @@ public class VendingMachineController {
             System.out.println(e.getMessage());
         } catch (InsufficientFundsException in) {
             System.out.println("Sorry, you have insufficient funds for this item.");
+            run();
         } catch (OutOfStockException st) {
             System.out.println("Sorry, this item is currently out of stock.");
+            run();
         }
     }
 
