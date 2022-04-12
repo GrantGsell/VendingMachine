@@ -50,6 +50,9 @@ public class VendingMachineController {
                         getChange();
                         break;
                     case 5:
+                        viewFunds();
+                        break;
+                    case 6:
                         keepGoing = false;
                         break;
                     default:
@@ -89,8 +92,14 @@ public class VendingMachineController {
 
     private void getChange() throws VendingMachinePersistenceException {
         view.displayGetChangeBanner();
-        service.getChange();
+        BigDecimal change = service.getChange();
+        view.displayChange(change);
         view.displayChangeSuccessBanner();
+    }
+
+    private void viewFunds() throws VendingMachinePersistenceException {
+        view.displayCurrentFundsBanner();
+        service.checkCredit();
     }
 
     // Let's user know they've exited
