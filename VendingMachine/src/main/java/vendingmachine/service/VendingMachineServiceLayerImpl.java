@@ -69,7 +69,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         BigDecimal newBalance = credit.subtract(item.getPrice().setScale(2, RoundingMode.HALF_UP));
         
 
-        if (credit.compareTo(zero) != -1) {
+        if (newBalance.compareTo(zero) != -1) {
             dao.decrementItemStock(code);
             credit = newBalance;
             return item;
