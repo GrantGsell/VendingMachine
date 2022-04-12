@@ -194,6 +194,11 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
      * 
      * @param item, the item whose data is going to be marhsalled.
      * @return a string denoting the marshalled data.
+     * 
+     * Data is arranged in the following order:
+     *  
+     *  | name | price | stock | selection code|
+     *  |  0   |   1   |   2   |       3       |
      */
     private String marshallData(Items item){
        // Create string builder to hold item data 
@@ -221,6 +226,11 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
      * 
      * @param itemAsText the object data in string form split by a delimeter.
      * @return an Items object containing all of the appropriate field data.
+     * 
+     * Data is arranged in the following order:
+     *  
+     *  | name | price | stock | selection code|
+     *  |  0   |   1   |   2   |       3       |
      */
     private Items unmarshallData(String itemAsText){
         // Create variable for number of fields
@@ -256,6 +266,11 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     
     /**
      * Write data from itemsMap into the database text file.
+     * 
+     * Data is arranged in the following order:
+     *  
+     *  | name | price | stock | selection code|
+     *  |  0   |   1   |   2   |       3       |
      */
     private void writeDataBase() throws VendingMachinePersistenceException{
         // Declare PrintWriter object
@@ -293,6 +308,11 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     
     /**
      *  Reads data from the database text file and stores it into the itemsMap.
+     * 
+     *  Data is arranged in the following order:
+     *  
+     *  | name | price | stock | selection code|
+     *  |  0   |   1   |   2   |       3       |
      */
     private void readDataBase() throws VendingMachinePersistenceException{
         // Declare scanner object
