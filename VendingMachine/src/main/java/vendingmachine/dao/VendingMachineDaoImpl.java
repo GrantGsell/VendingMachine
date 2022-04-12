@@ -38,7 +38,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
         
         // Load in the initalized data
         try{
-        this.readDataBase();
+            this.readDataBase();
         }catch (Exception e){
             throw new VendingMachinePersistenceException("Inital database read error", e);
         }

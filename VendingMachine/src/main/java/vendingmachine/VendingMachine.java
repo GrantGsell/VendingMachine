@@ -9,7 +9,12 @@ import vendingmachine.controller.VendingMachineController;
 public class VendingMachine {
 
     public static void main(String[] args) {
-        VendingMachineController runner = new VendingMachineController();
-        runner.run();
+        try{
+            VendingMachineController runner = new VendingMachineController();
+            runner.run();
+        }catch(Exception e){
+            System.out.println("Error");
+        }
+        
     }
 }

@@ -6,8 +6,9 @@ package vendingmachine.controller;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import vendingmachine.dao.InsufficientFundsException;
-import vendingmachine.dao.OutOfStockException;
+import java.util.List;
+import vendingmachine.service.InsufficientFundsException;
+import vendingmachine.service.OutOfStockException;
 import vendingmachine.dao.VendingMachineDao;
 import vendingmachine.dao.VendingMachineDaoImpl;
 import vendingmachine.dao.VendingMachinePersistenceException;
@@ -23,10 +24,18 @@ import vendingmachine.ui.VendingMachineView;
 public class VendingMachineController {
 
     // Model and VIew class objects
-    private VendingMachineView view = new VendingMachineView();
-    private VendingMachineDao dao = new VendingMachineDaoImpl();
-    private VendingMachineServiceLayer service = new VendingMachineServiceLayerImpl();
+    private VendingMachineView view;// = new VendingMachineView();
+    private VendingMachineDao dao;// = new VendingMachineDaoImpl();
+    private VendingMachineServiceLayer service;// = new VendingMachineServiceLayerImpl();
 
+    // Constructor
+    public VendingMachineController() throws VendingMachinePersistenceException{
+        view = new VendingMachineView();
+        dao = new VendingMachineDaoImpl();
+        service = new VendingMachineServiceLayerImpl();
+    }
+    
+    
     // Function that controls program flow
     public void run() {
         boolean keepGoing = true;
@@ -73,7 +82,8 @@ public class VendingMachineController {
 
     private void listInventory() throws VendingMachinePersistenceException {
         view.displayInventoryBanner();
-        //TODO
+        List<Items> allItems = service.getAllItems();
+        
     }
 
     private void addFunds() throws VendingMachinePersistenceException {
