@@ -18,14 +18,24 @@ import vendingmachine.dto.Items;
  */
 public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer{
 
+    //Dao and local variables
     private VendingMachineDaoImpl dao;
     private BigDecimal credit = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
     private BigDecimal zero = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
     
+    // constructor
     public VendingMachineServiceLayerImpl() throws VendingMachinePersistenceException{
         dao = new VendingMachineDaoImpl();
     }
     
+    
+    /*
+        This method takes in a code and will check if it is a valid code.
+        If the code is invalid a null value is returned. If the cod esi valid
+        then we will see if the item is purchaseable. If it is not then an exception will be
+        thrown. If it is purchaseable it will decrement the available stock and update the 
+        customer's credit. 
+    */
     @Override
     public Items buyItem(String code)  throws VendingMachinePersistenceException, InsufficientFundsException, OutOfStockException{
        
@@ -71,7 +81,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     @Override
     public BigDecimal checkCredit()  throws VendingMachinePersistenceException{
         
-        return checkCredit();
+        return credit;
         
     }
 
