@@ -18,9 +18,13 @@ import vendingmachine.dto.Items;
  */
 public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer{
 
-    private VendingMachineDaoImpl dao = new VendingMachineDaoImpl();
+    private VendingMachineDaoImpl dao;
     private BigDecimal credit = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
     private BigDecimal zero = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
+    
+    public VendingMachineServiceLayerImpl() throws VendingMachinePersistenceException{
+        dao = new VendingMachineDaoImpl();
+    }
     
     @Override
     public Items buyItem(String code)  throws VendingMachinePersistenceException, InsufficientFundsException, OutOfStockException{
