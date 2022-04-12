@@ -6,6 +6,8 @@ package vendingmachine.controller;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import vendingmachine.dao.InsufficientFundsException;
+import vendingmachine.dao.OutOfStockException;
 import vendingmachine.dao.VendingMachineDao;
 import vendingmachine.dao.VendingMachineDaoImpl;
 import vendingmachine.dao.VendingMachinePersistenceException;
@@ -61,6 +63,10 @@ public class VendingMachineController {
             }
         } catch (VendingMachinePersistenceException e) {
             System.out.println(e.getMessage());
+        } catch (InsufficientFundsException in) {
+            System.out.println("Sorry, you have insufficient funds for this item.");
+        } catch (OutOfStockException st) {
+            System.out.println("Sorry, this item is currently out of stock.");
         }
         exitMessage();
     }
@@ -78,7 +84,7 @@ public class VendingMachineController {
         view.displayFundsAddedBanner();
     }
 
-    private void buyItem() throws VendingMachinePersistenceException {
+    private void buyItem() throws VendingMachinePersistenceException, InsufficientFundsException, OutOfStockException {
         view.displayBuyItemBanner();
         String itemCode = view.getItemCode();
         service.buyItem(itemCode);
