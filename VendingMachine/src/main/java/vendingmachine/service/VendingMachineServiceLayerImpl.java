@@ -83,7 +83,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     @Override
     public BigDecimal getChange() throws VendingMachinePersistenceException {
         BigDecimal tmp = new BigDecimal(credit.toString());
-        //credit = new BigDecimal("0.00");
+        
 
         credit = credit.multiply(new BigDecimal("100"));
         int total = credit.intValue();
@@ -100,6 +100,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         int pennies = total / Coins.PENNY.value;
         total = total % Coins.PENNY.value;
 
+        credit = new BigDecimal("0.00");
         System.out.println("Quarters: " + quarters + "\nDimes: " + dimes + "\nNickles: " + nickles + "\nPennies: " + pennies);
 
         return tmp;
