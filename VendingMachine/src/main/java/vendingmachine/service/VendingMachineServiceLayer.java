@@ -6,6 +6,7 @@ package vendingmachine.service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.dto.Items;
 
 /**
@@ -14,14 +15,15 @@ import vendingmachine.dto.Items;
  */
 public interface VendingMachineServiceLayer {
     
-    public Items buyItem(String code);
+    public Items buyItem(String code)  throws VendingMachinePersistenceException;
     
-    public BigDecimal getChange();
+    public BigDecimal getChange()  throws VendingMachinePersistenceException;
     
-    public List<Items> purchaseable();
+    public List<Items> purchaseable()  throws VendingMachinePersistenceException;
     
-    public void addCredit(BigDecimal amount);
+    public void addCredit(BigDecimal amount)  throws VendingMachinePersistenceException;
     
-    public BigDecimal checkCredit();
-        
+    public BigDecimal checkCredit()  throws VendingMachinePersistenceException;
+    
+    public List<Items> getAllItems() throws VendingMachinePersistenceException;
 }
