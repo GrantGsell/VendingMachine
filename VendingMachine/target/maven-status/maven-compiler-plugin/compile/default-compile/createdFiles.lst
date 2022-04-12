@@ -1,7 +1,15 @@
-<<<<<<< HEAD
+vendingmachine\dao\VendingMachineAuditDao.class
 vendingmachine\dto\Items.class
-vendingmachine\dao\VendingMachinePersistenceException.class
+vendingmachine\ui\VendingMachineView.class
+vendingmachine\dao\VendingMachineDaoImpl.class
+vendingmachine\service\VendingMachineServiceLayerImpl.class
 vendingmachine\ui\UserIO.class
+vendingmachine\VendingMachine.class
+vendingmachine\dao\VendingMachinePersistenceException.class
+vendingmachine\service\VendingMachineServiceLayer.class
+vendingmachine\controller\VendingMachineController.class
 vendingmachine\dao\VendingMachineDao.class
-=======
->>>>>>> 13770acbbe7357f6abd64133b3558ade12d4c608
+vendingmachine\dao\VendingMachineAuditDaoImpl.class
+vendingmachine\service\OutOfStockException.class
+vendingmachine\ui\UserIOConsoleImpl.class
+vendingmachine\service\InsufficientFundsException.class
