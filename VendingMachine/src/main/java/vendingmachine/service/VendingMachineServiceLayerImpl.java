@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
+import vendingmachine.dao.InsufficientFundsException;
+import vendingmachine.dao.OutOfStockException;
 import vendingmachine.dao.VendingMachineDaoImpl;
 import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.dto.Items;
@@ -23,11 +25,13 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     private BigDecimal zero = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
     
     @Override
-    public Items buyItem(String code)  throws VendingMachinePersistenceException{
+    public Items buyItem(String code)  throws VendingMachinePersistenceException, InsufficientFundsException, OutOfStockException{
        
        Items item = dao.getItem(code);
        
-       if (item == null || item.getStock() == 0) return null;
+       if (item == null) return null;
+       
+       if (item.getStock() < 1) throw new OutOfStockException("Out of stock");
        
        BigDecimal itemCost = item.getPrice().setScale(2, RoundingMode.HALF_UP);
        credit = credit.subtract(itemCost);
@@ -37,13 +41,14 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
            return item;
        }
        
-       return null;
+       throw new InsufficientFundsException("Not enough funds");
     }
 
     @Override
     public BigDecimal getChange()  throws VendingMachinePersistenceException{
-        
-        return credit;
+        BigDecimal tmp = new BigDecimal(credit.toString());
+        credit = new BigDecimal("0.00");
+        return tmp;
         
     }
 
@@ -70,7 +75,9 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
 
     @Override
     public List<Items> getAllItems() throws VendingMachinePersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        return dao.getAllItems();
+        
     }
     
 }

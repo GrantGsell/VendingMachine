@@ -6,6 +6,8 @@ package vendingmachine.service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import vendingmachine.dao.InsufficientFundsException;
+import vendingmachine.dao.OutOfStockException;
 import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.dto.Items;
 
@@ -15,7 +17,7 @@ import vendingmachine.dto.Items;
  */
 public interface VendingMachineServiceLayer {
     
-    public Items buyItem(String code)  throws VendingMachinePersistenceException;
+    public Items buyItem(String code)  throws VendingMachinePersistenceException, InsufficientFundsException, OutOfStockException;
     
     public BigDecimal getChange()  throws VendingMachinePersistenceException;
     
