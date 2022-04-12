@@ -4,9 +4,13 @@
  */
 package vendingmachine.controller;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import vendingmachine.dao.VendingMachineDao;
 import vendingmachine.dao.VendingMachineDaoImpl;
 import vendingmachine.dao.VendingMachinePersistenceException;
+import vendingmachine.dto.Items;
+import vendingmachine.service.VendingMachineServiceLayer;
 import vendingmachine.ui.VendingMachineView;
 
 /**
@@ -18,6 +22,7 @@ public class VendingMachineController {
     // Model and VIew class objects
     private VendingMachineView view = new VendingMachineView();
     private VendingMachineDao dao = new VendingMachineDaoImpl();
+    private VendingMachineServiceLayer service = new VendingMachineServiceLayer();
 
     // Function that controls program flow
     public void run() {
@@ -26,8 +31,8 @@ public class VendingMachineController {
 
         try {
             while (keepGoing) {
-                view.displayInventoryBanner();
-                dao.listInventory(); //Begins with Inventor Banner and list of inventory every time
+
+                listInventory(); //Begins with Inventor Banner and list of inventory every time
 
                 menuSelection = getMenuSelection();
                 switch (menuSelection) {
@@ -41,6 +46,9 @@ public class VendingMachineController {
                         browseAffordableItems();
                         break;
                     case 4:
+                        getChange();
+                        break;
+                    case 5:
                         keepGoing = false;
                         break;
                     default:
@@ -53,23 +61,36 @@ public class VendingMachineController {
         exitMessage();
     }
 
+    private void listInventory() throws VendingMachinePersistenceException {
+        view.displayInventoryBanner();
+        //TODO
+    }
+
     private void addFunds() throws VendingMachinePersistenceException {
         view.displayAddFundsBanner();
-        Double fundsAdditionAmount = view.getFundsAdditionAmount();
-        service.addFunds(fundsAdditionAmount);
+        String fundsAdditionAmount = view.getFundsAdditionAmount();
+        BigDecimal fundsBigDecimal = new BigDecimal(fundsAdditionAmount).setScale(2, RoundingMode.HALF_UP);
+        service.addCredit(fundsBigDecimal);
         view.displayFundsAddedBanner();
     }
 
     private void buyItem() throws VendingMachinePersistenceException {
         view.displayBuyItemBanner();
         String itemCode = view.getItemCode();
-        service.buyItem(itemCode);
+        Items item = dao.getItem(itemCode);
+        service.buyItem(item);
         view.displayEnjoyBanner();
     }
 
     private void browseAffordableItems() throws VendingMachinePersistenceException {
         view.displayAffordableItemsBanner();
-        dao.affordableItems;
+        service.purchaseable();
+    }
+
+    private void getChange() throws VendingMachinePersistenceException {
+        view.displayGetChangeBanner();
+        service.getChange();
+        view.displayChangeSuccessBanner();
     }
 
     // Let's user know they've exited
@@ -86,5 +107,5 @@ public class VendingMachineController {
     private int getMenuSelection() {
         return view.getMenuSelection();
     }
-    
+
 }
