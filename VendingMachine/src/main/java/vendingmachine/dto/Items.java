@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Grant
+ * @author Grant Gsell
  */
 public class Items {
     // Item fields

@@ -14,7 +14,7 @@ import vendingmachine.dto.Items;
 
 /**
  *
- * @author Grant
+ * @author Grant Gsell
  */
 public class VendingMachineDaoImplTest {
     // Declare instance of DAO
@@ -250,8 +250,5 @@ public class VendingMachineDaoImplTest {
         // Assert returned item object stock is equal to 0
         assertEquals(returnedItem.getStock(), 0, "Item had a stock of 1 post "
                 + "double decrement, decrementing one more should yeild zero");
-        
-        // Try to decrement item stock by one, assert exception
-        
-    }    
+    }
 }

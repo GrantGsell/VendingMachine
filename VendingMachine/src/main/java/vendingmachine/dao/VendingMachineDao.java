@@ -5,7 +5,7 @@ import vendingmachine.dto.Items;
 
 /**
  *
- * @author Grant
+ * @author Grant Gsell
  */
 public interface VendingMachineDao {
     

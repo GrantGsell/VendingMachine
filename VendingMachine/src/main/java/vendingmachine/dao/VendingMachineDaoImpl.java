@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ import vendingmachine.dto.Items;
 
 /**
  *
- * @author Grant
+ * @author Grant Gsell
  */
 public class VendingMachineDaoImpl implements VendingMachineDao{
     // Vending Machine db variable
@@ -22,10 +23,12 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     // Delimeter Variable
     private final String DELIMETER = ":::";
     
-    // Map to hold databse data
+    // Map to hold database data
     Map<String, Items> itemsMap;
     
-    // Vending machine constructors
+    /**
+     * Vending machine constructors
+     */
     public VendingMachineDaoImpl(){
         // Instantiate itemsMap
         itemsMap = new HashMap<String, Items>();
@@ -44,77 +47,146 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
 
     
     /**
+     * Adds an item to the vending machine. Returns null if the item associated 
+     * with this selection code matches, otherwise returns the item that is 
+     * being replaced.
      * 
-     * @param selectionCode
-     * @param item
-     * @return 
+     * @param selectionCode, the vending machine location for the given item.
+     * @param item, the item that will be added to the vending machine.
+     * @return null if the associated item matches the one provided, otherwise
+     * the item that is being replaced.
      */
     @Override
     public Items addItem(String selectionCode, Items item) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Read in the database first to ensure map is up to date
+        this.readDataBase();
+        
+        // Add the new item to the map, obtain map return value
+        Items returnedItem = itemsMap.put(selectionCode, item);
+        
+        // Write the updated map to the database
+        this.writeDataBase();
+        
+        // Return new item
+        return returnedItem;
     }
 
     
     /**
+     * Removes the selected item from the vending machine. Returns the item 
+     * being removed otherwise returns null if there is no item matching  the
+     * selection code.
      * 
-     * @param selectionCode
-     * @param item
+     * @param selectionCode, the vending machine location for the given item.
+     * @param item, the item that will be removed.
      * @return 
      */
     @Override
     public Items removeItem(String selectionCode, Items item) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Read in the database first to ensure the map is up to date
+        this.readDataBase();
+        
+        // Remove the item from the map
+        Items returnedItem = itemsMap.remove(selectionCode);
+        
+        // Write the updated map to the database
+        this.writeDataBase();
+        
+        // Return the removed item value
+        return returnedItem;
     }
 
     
     /**
+     * Gets an item associated with the given selection code.
      * 
-     * @param selectionCode
-     * @return 
+     * @param selectionCode, the vending machine location for the given item.
+     * @return an Items object that is associated with selection code, otherwise
+     * null.
      */
     @Override
     public Items getItem(String selectionCode) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Read in the database first to ensure the map is up to date
+        this.readDataBase();
+        
+        // Return the specified item 
+        return itemsMap.get(selectionCode);
     }
 
     
     /**
+     * Obtains and returns a list of all items within the vending machine.
      * 
-     * @return 
+     * @return a list of all items in the vending machine.
      */
     @Override
     public List<Items> getAllItems() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Read in the database first to ensure the map is up to date
+        this.readDataBase();
+        
+        // Return all values of the map, which corresponds to all items objects
+        return new ArrayList(itemsMap.keySet());
     }
 
     
     /**
+     * Increments the stock field of the item associated with selection code. 
      * 
-     * @param selectionCode
-     * @return 
+     * @param selectionCode, the code associated with the item whose stock is 
+     * going to be incremented.
+     * @return the item object whose stock has been incremented.
      */
     @Override
     public Items incrementItemStock(String selectionCode) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Read in the database first to ensure the map is up to date
+        this.readDataBase();
+        
+        // Exctract the object
+        Items item = itemsMap.get(selectionCode);
+        
+        // Increment the specified item stock
+        item.setStock(item.getStock() + 1);
+        
+        // Put the item back into the map
+        itemsMap.put(selectionCode, item);
+        
+        // Return the specified, updated item
+        return item;
     }
 
     
     /**
+     * Decrements the stock field of the item associated with the provided 
+     * selection code. Throws error if the stock is already zero.
      * 
-     * @param selectionCode
-     * @return 
+     * @param selectionCode, the code associated with the item whose stock is
+     * going to be decremented.
+     * @return the item object whose stock has been decremented.
      */
     @Override
     public Items decrementItemStock(String selectionCode) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Read in the database first to ensure the map is up to date      
+        this.readDataBase(); 
+        
+        // Exctract the object
+        Items item = itemsMap.get(selectionCode);
+                
+        // Decrement the specified item stock
+        item.setStock(item.getStock() - 1);
+        
+        // Put the item back into the map
+        itemsMap.put(selectionCode, item);
+        
+        // Return the specified, updated item
+        return item;
     }
     
     
     /**
+     * Marshalls data from an Items object into a string for file writing.
      * 
-     * 
-     * @param item
-     * @return 
+     * @param item, the item whose data is going to be marhsalled.
+     * @return a string denoting the marshalled data.
      */
     private String marshallData(Items item){
        // Create string builder to hold item data 
@@ -138,9 +210,10 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     
     
     /**
+     * Unmarshalls data from string into an Items object.
      * 
-     * @param itemAsText
-     * @return 
+     * @param itemAsText the object data in string form split by a delimeter.
+     * @return an Items object containing all of the appropriate field data.
      */
     private Items unmarshallData(String itemAsText){
         // Create variable for number of fields
@@ -175,7 +248,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     
     
     /**
-     * 
+     * Write data from itemsMap into the database text file.
      */
     private void writeDataBase(){
         // Declare PrintWriter object
@@ -212,7 +285,7 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     
     
     /**
-     * 
+     *  Reads data from the database text file and stores it into the itemsMap.
      */
     private void readDataBase(){
         // Declare scanner object
