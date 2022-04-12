@@ -102,7 +102,7 @@ public class VendingMachineServiceLayerImplTest {
 
             // get new list of purchaseable items
             available = service.purchaseable();
-            assertTrue(available.size() == 2, "2 items should be purchaseable with a starting amount of 1.00. ");
+            assertTrue(available.size() == 2, "2 items should be purchaseable with an amount of 1.00. ");
 
         } catch (Exception e) {
             e.printStackTrace();
