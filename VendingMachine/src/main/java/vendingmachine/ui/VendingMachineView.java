@@ -87,6 +87,10 @@ public class VendingMachineView {
         System.out.println("Your change is...\n " + "Quarters: " + change[0] + "\nDimes: " + change[1] + "\nNickles: " + change[2] + "\nPennies: " + change[3]);
     }
 
+    public void displayChangeFunds(BigDecimal currentCredit) {
+        System.out.println("Total change: " + currentCredit);
+    }
+
     public void displayViewFunds(BigDecimal currentCredit) {
         System.out.println("Your current balance is: " + currentCredit);
     }
