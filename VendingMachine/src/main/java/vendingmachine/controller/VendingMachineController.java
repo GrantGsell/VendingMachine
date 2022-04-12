@@ -29,12 +29,13 @@ public class VendingMachineController {
     private VendingMachineServiceLayer service;// = new VendingMachineServiceLayerImpl();
 
     // Constructor
-    public VendingMachineController() throws VendingMachinePersistenceException {
+    public VendingMachineController() throws VendingMachinePersistenceException{
         view = new VendingMachineView();
         dao = new VendingMachineDaoImpl();
         service = new VendingMachineServiceLayerImpl();
     }
-
+    
+    
     // Function that controls program flow
     public void run() {
         boolean keepGoing = true;
@@ -63,7 +64,6 @@ public class VendingMachineController {
                         viewFunds();
                         break;
                     case 6:
-                        getChange();
                         keepGoing = false;
                         exitMessage();
                         break;
@@ -105,7 +105,7 @@ public class VendingMachineController {
 
     private void browseAffordableItems() throws VendingMachinePersistenceException {
         view.displayAffordableItemsBanner();
-        view.displayItemList(service.purchaseable());
+        view.displayItemList(service.purchaseable());        
     }
 
     private void getChange() throws VendingMachinePersistenceException {

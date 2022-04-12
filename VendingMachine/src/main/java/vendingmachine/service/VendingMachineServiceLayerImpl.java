@@ -73,7 +73,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         
 
         if (newBalance.compareTo(zero) != -1) {
-            dao.decrementItemStock(code);
+            item = dao.decrementItemStock(code);
             credit = newBalance;
             audit.writeAuditEntry("Purchased: " + item.getName() + "|| Stock: " + item.getStock());
             return item;
