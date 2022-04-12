@@ -108,7 +108,7 @@ public class VendingMachineController {
 
     private void getChange() throws VendingMachinePersistenceException {
         view.displayGetChangeBanner();
-        Integer [] change = service.getChange();
+        int[] change = service.getChange();
         view.displayChange(change);
         view.displayChangeSuccessBanner();
     }
