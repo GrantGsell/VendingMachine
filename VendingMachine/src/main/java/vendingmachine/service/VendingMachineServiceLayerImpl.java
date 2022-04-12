@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
+import vendingmachine.dao.VendingMachineAuditDao;
+import vendingmachine.dao.VendingMachineAuditDaoImpl;
 import vendingmachine.dao.VendingMachineDaoImpl;
 import vendingmachine.dao.VendingMachinePersistenceException;
 import vendingmachine.dto.Items;
@@ -40,6 +42,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     private VendingMachineDaoImpl dao;
     private BigDecimal credit = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
     private BigDecimal zero = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
+    private VendingMachineAuditDaoImpl  audit = new VendingMachineAuditDaoImpl();
 
     // constructor
     public VendingMachineServiceLayerImpl() throws VendingMachinePersistenceException {
@@ -72,6 +75,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         if (newBalance.compareTo(zero) != -1) {
             dao.decrementItemStock(code);
             credit = newBalance;
+            audit.writeAuditEntry("Purchased: " + item.getName() + "|| Stock: " + item.getStock());
             return item;
         }
 
