@@ -113,7 +113,8 @@ public class VendingMachineController {
 
     private void viewFunds() throws VendingMachinePersistenceException {
         view.displayCurrentFundsBanner();
-        service.checkCredit();
+        BigDecimal currentCredit = service.checkCredit();
+        view.displayViewFunds(currentCredit);
     }
 
     // Let's user know they've exited

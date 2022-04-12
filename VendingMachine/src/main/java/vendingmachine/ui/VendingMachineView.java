@@ -5,6 +5,8 @@
 package vendingmachine.ui;
 
 import java.math.BigDecimal;
+import java.util.List;
+import vendingmachine.dto.Items;
 
 /**
  *
@@ -83,4 +85,19 @@ public class VendingMachineView {
         System.out.println("Your change is: " + change);
     }
 
+    public void displayViewFunds(BigDecimal currentCredit) {
+        System.out.println("Your current balance is: " + currentCredit);
+    }
+
+    public void displayStudentList(List<Items> allItems) {
+        for (Items item : allItems) {
+            String itemInfo = String.format("#%s : %s - %s $%s",
+                    item.getSelectionCode(),
+                    item.getName(),
+                    item.getStock(),
+                    item.getPrice());
+            io.print(itemInfo);
+        }
+        io.readString("Please hit enter to continue.");
+    }
 }
