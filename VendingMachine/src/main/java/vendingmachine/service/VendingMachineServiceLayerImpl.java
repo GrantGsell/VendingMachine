@@ -18,6 +18,24 @@ import vendingmachine.dto.Items;
  */
 public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer {
 
+    enum Coins {
+        QUARTER(new BigDecimal("0.25")),
+        DIME(new BigDecimal("0.10")),
+        NICKLE(new BigDecimal("0.5")),
+        PENNY(new BigDecimal("0.01"));
+
+        private BigDecimal value;
+
+        Coins(BigDecimal amount) {
+            value = amount;
+        }
+
+        BigDecimal getValue() {
+            return value;
+        }
+
+    }
+
     //Dao and local variables
     private VendingMachineDaoImpl dao;
     private BigDecimal credit = new BigDecimal("0.00").setScale(2, RoundingMode.HALF_UP);
@@ -65,7 +83,22 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     @Override
     public BigDecimal getChange() throws VendingMachinePersistenceException {
         BigDecimal tmp = new BigDecimal(credit.toString());
-        credit = new BigDecimal("0.00");
+        //credit = new BigDecimal("0.00");
+
+        BigDecimal quarters = credit.divide(Coins.QUARTER.getValue());
+        credit = credit.divideAndRemainder(Coins.QUARTER.getValue())[1];
+
+        BigDecimal dimes = credit.divide(Coins.DIME.getValue());
+        credit = credit.divideAndRemainder(Coins.DIME.getValue())[1];
+
+        BigDecimal nickles = credit.divide(Coins.NICKLE.getValue());
+        credit = credit.divideAndRemainder(Coins.NICKLE.getValue())[1];
+
+        BigDecimal penny = credit.divide(Coins.PENNY.getValue());
+        credit = credit.divideAndRemainder(Coins.PENNY.getValue())[1];
+
+        System.out.println("Quarters: " + quarters + "\nDimes: " + dimes +"\nNickles: " + nickles+"\nPennies: " + penny);
+        
         return tmp;
 
     }
@@ -96,8 +129,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
 
     /*
         this method returns the ammount of credit the user has
-    */
-    
+     */
     @Override
     public BigDecimal checkCredit() throws VendingMachinePersistenceException {
 
@@ -107,8 +139,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
 
     /*
         this will return the available items in the vending machine.
-    */
-    
+     */
     @Override
     public List<Items> getAllItems() throws VendingMachinePersistenceException {
 
