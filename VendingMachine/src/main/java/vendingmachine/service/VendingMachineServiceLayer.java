@@ -23,6 +23,5 @@ public interface VendingMachineServiceLayer {
     public void addCredit(BigDecimal amount);
     
     public BigDecimal checkCredit();
-    
-    
+        
 }
