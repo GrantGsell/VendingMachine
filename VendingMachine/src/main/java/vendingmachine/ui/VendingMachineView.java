@@ -5,6 +5,8 @@
 package vendingmachine.ui;
 
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import vendingmachine.dto.Items;
 
@@ -89,7 +91,8 @@ public class VendingMachineView {
         System.out.println("Your current balance is: " + currentCredit);
     }
 
-    public void displayStudentList(List<Items> allItems) {
+    public void displayItemList(List<Items> allItems) {
+        Collections.sort(allItems, Comparator.comparing((item) -> item.getSelectionCode()));
         for (Items item : allItems) {
             String itemInfo = String.format("#%s : %s - x%s - $%s",
                     item.getSelectionCode(),

@@ -19,7 +19,7 @@ import vendingmachine.ui.VendingMachineView;
 
 /**
  *
- * @author Grant
+ * @author harlee
  */
 public class VendingMachineController {
 
@@ -83,7 +83,7 @@ public class VendingMachineController {
     private void listInventory() throws VendingMachinePersistenceException {
         view.displayInventoryBanner();
         List<Items> allItems = service.getAllItems();
-        view.displayStudentList(allItems);
+        view.displayItemList(allItems);
     }
 
     private void addFunds() throws VendingMachinePersistenceException {
