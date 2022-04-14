@@ -8,12 +8,15 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import vendingmachine.dto.Items;
 
 /**
  *
  * @author harle
  */
+@Component
 public class VendingMachineView {
     // UserIO declaration
     private UserIO io;
@@ -23,7 +26,12 @@ public class VendingMachineView {
         
     }
     
-    // Constructor for Dependency Injection
+    /**
+     * Constructor for Dependency Injection
+     * 
+     * @param io 
+     */
+    @Autowired
     public VendingMachineView(UserIO io){
         this.io = io;
     }

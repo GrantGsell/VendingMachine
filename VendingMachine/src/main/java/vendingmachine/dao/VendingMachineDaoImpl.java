@@ -10,12 +10,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import vendingmachine.dto.Items;
 
 /**
  *
  * @author Grant Gsell
  */
+@Component
 public class VendingMachineDaoImpl implements VendingMachineDao{
     // Vending Machine db variable
     private final String DATA_BASE;
@@ -27,8 +30,9 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
     Map<String, Items> itemsMap = new HashMap<String, Items>();
     
     /**
-     * Vending machine constructors
+     * Vending machine constructor for Dependency Injection
      */
+    @Autowired
     public VendingMachineDaoImpl() {
         // Instantiate itemsMap
         itemsMap = new HashMap<String, Items>();
@@ -44,6 +48,8 @@ public class VendingMachineDaoImpl implements VendingMachineDao{
         }
     }
     
+    
+    // Constructor for Testing
     public VendingMachineDaoImpl(String filePath){
         // Instantiate itemsMap
         //itemsMap = new HashMap<String, Items>();

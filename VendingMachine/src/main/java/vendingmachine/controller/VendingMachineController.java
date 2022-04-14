@@ -7,6 +7,8 @@ package vendingmachine.controller;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import vendingmachine.service.InsufficientFundsException;
 import vendingmachine.service.OutOfStockException;
 import vendingmachine.dao.VendingMachineDao;
@@ -21,12 +23,13 @@ import vendingmachine.ui.VendingMachineView;
  *
  * @author harlee
  */
+@Component
 public class VendingMachineController {
 
     // Model and VIew class objects
-    private VendingMachineView view;// = new VendingMachineView();
-    private VendingMachineDao dao;// = new VendingMachineDaoImpl();
-    private VendingMachineServiceLayer service;// = new VendingMachineServiceLayerImpl();
+    private VendingMachineView view;
+    private VendingMachineDao dao;
+    private VendingMachineServiceLayer service;
 
     // Constructors
     public VendingMachineController() throws VendingMachinePersistenceException{
@@ -36,6 +39,7 @@ public class VendingMachineController {
     }
     
     // Constructor for Dependency Injection
+    @Autowired
     public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) {
         this.service = service;
         this.view = view;

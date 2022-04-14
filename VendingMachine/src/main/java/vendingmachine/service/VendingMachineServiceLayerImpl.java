@@ -8,8 +8,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import vendingmachine.dao.VendingMachineAuditDao;
-import vendingmachine.dao.VendingMachineAuditDaoImpl;
 import vendingmachine.dao.VendingMachineDao;
 import vendingmachine.dao.VendingMachineDaoImpl;
 import vendingmachine.dao.VendingMachinePersistenceException;
@@ -19,6 +20,7 @@ import vendingmachine.dto.Items;
  *
  * @author Juan B
  */
+@Component
 public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer {
 
     enum Coins {
@@ -52,6 +54,10 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         dao = new VendingMachineDaoImpl();
     }
     
+    /**
+     * Constructor for Dependency Injection
+     */
+    @Autowired
     public VendingMachineServiceLayerImpl(VendingMachineDao dao, VendingMachineAuditDao auditDao) {
         this.dao = dao;
         this.audit = auditDao;
