@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import vendingmachine.controller.VendingMachineController;
 import vendingmachine.dao.VendingMachineAuditDao;
 import vendingmachine.dao.VendingMachineAuditDaoImpl;
@@ -18,6 +19,19 @@ import vendingmachine.ui.VendingMachineView;
 public class VendingMachine {
 
     public static void main(String[] args) {
+        
+        /**
+         * Dependency Injection with Spring Framework
+         */
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+        appContext.scan("vendingmachine");
+        appContext.refresh();
+        
+        VendingMachineController appController = appContext.getBean("vendingMachineController", VendingMachineController.class);
+        appController.run();
+        
+       
+        /* Old version of dependency injection
         // Instantiate the UserIO implementation
         UserIO appIO = new UserIOConsoleImpl();
         
@@ -38,5 +52,6 @@ public class VendingMachine {
         
         // Run the applicaiton
         appController.run();
+        */
     }
 }

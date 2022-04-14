@@ -4,11 +4,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Grant
  */
+@Component
 public class VendingMachineAuditDaoImpl implements VendingMachineAuditDao {
     // Create audit file 
     public static final String AUDIT_FILE = "audit.txt";
